@@ -1,0 +1,48 @@
+{% extends "auth/login.html" %}
+
+{% block content %}
+
+<div class="page-container">
+   <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/DRSapp logo.png') }}" alt="Logo" class="centered-logo">
+   </div>
+   <div class="register-container">
+        <h1>{{ _('Register') }}</h1>
+        <p>
+            {{ _('Already have an account?') }}
+            <a href="{{ url_for('auth.login') }}">{{ _('Click to Sign In!') }}</a>
+        </p>
+        <form method="POST" action="{{ url_for('auth.register') }}" class="register-form">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <label for="username">{{ _('Username') }}</label>
+                {{ form.username(id="username") }}
+                {% for error in form.username.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="email">{{ _('Email Address') }}</label>
+                {{ form.email(id="email") }}
+                {% for error in form.email.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="password">{{ _('Password') }}</label>
+                {{ form.password(id="password") }}
+                {% for error in form.password.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="form.password2">{{ _('Confirm Password') }}</label>
+                {{ form.password2(id="password2") }}
+                {% for error in form.password2.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <button type="submit" class="submit-btn">{{ _('Register') }}</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Office application template">
+        <link rel="icon" href="/static/favicon.ico">
+        <title>{% block title %}{{ title }}{% endblock %} - Office</title>
+        {% block head %}
+        <!-- Additional metadata or CSS files -->
+        {% endblock %}
+    </head>
+    <body>
+        {% block content %}
+        <!-- Main content will be inserted here -->
+        {% endblock %}
+    </body>
+    <footer>
+        {% block footer %}
+        <!-- Footer content -->
+        <p>&copy; 2025 Office. All rights reserved.</p>
+        {% endblock %}
+    </footer>
+</html>
+
