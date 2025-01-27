@@ -193,4 +193,5 @@ class User(PaginatedAPIMixin, UserMixin, db.Model):
 
 @login.user_loader
 def load_user(id):
+    print(f"Loading user with ID: {id}")
     return db.session.get(User, int(id))
