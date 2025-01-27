@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+"""Configuration File """
+import os
+from dotenv import load_dotenv
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, ".env"))
+
+
+class Config:
+    # General Configuration
+    SECRET_KEY = os.environ.get("SECRET_KEY") or "you-will-never-guess"
+
+    # SQLAlchemy Configuration
+    SQLALCHEMY_DATABASE_URI = os.environ.get(
+        "DATABASE_URL"
+    ) or "sqlite:///" + os.path.join(basedir, "app.db")
+
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # MongoDB Configuration
+    MONGODB_URI = os.environ.get("MONGODB_URI", "mongodb://localhost:27017/")
+    MONGODB_DB_NAME = os.environ.get("MONGODB_DB_NAME", "mydatabase")
+
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
+    MAIL_SERVER = os.environ.get("MAIL_SERVER")
+    MAIL_PORT = int(os.environ.get("MAIL_PORT") or 25)
+    MAIL_USE_TLS = os.environ.get("MAIL_USE_TLS") is not None
+    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
+    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    ADMINS = ["your-email@example.com"]
+    LANGUAGES = ["en", "es", "de"]  # es is Spanish, de is German. Sophie so assist in translation
+
+    # Upload configuration
+    # Directory for storing uploaded files
+    UPLOAD_FOLDER = "uploads"
+    # Max upload size: 16 MB
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+    # Allowed file types
+    ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif", "pdf", "docx", "txt"}
+
+    @staticmethod
+    def init_app(app):
+        # Create the upload folder if it doesn't exist
+        os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
